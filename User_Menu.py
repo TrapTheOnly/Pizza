@@ -47,9 +47,11 @@ class user_menu:
         self.pizza_vars[0]=100
         for i in range(1, self.row_count+1):
             self.pizza_vars[i]=IntVar()
-            self.c1.execute("SELECT pizza_type FROM pizzas WHERE id = ?", (int(i),))
-            pizza_name = str(list(self.c1.fetchone())[0])
-            self.pizza_checks[i] = Checkbutton(frame, text = pizza_name, bg = '#f2aca5',
+            self.c1.execute("SELECT pizza_type FROM pizzas WHERE id = ?", (i, ))
+            a = str(list(self.c1.fetchone())[0])
+            #pizza_name = str(list(self.c1.fetchone())[0])
+            self.pizza_checks[i] = Checkbutton(frame, 
+                        text = a, bg = '#f2aca5',
                         font = self.font2, fg = 'black', 
                         activebackground = '#f2aca5', 
                         variable = self.pizza_vars[i], 

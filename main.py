@@ -145,11 +145,22 @@ def main():
         		pizza_price integer,
         		ingredients text,
                 id integer
-        )""")
+            )""")
     except:
         pass
-    #c1.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", (str('Barbeque'), int(12), str("Chicken, Mozarella Cheese, Mushrooms, BBQ Sauce"), int(1)))
-    #c1.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", (str('Pepperoni'), int(10), str("Ultra Pepperoni, Mozarella Cheese"), int(2)))
+    conn1.commit()
+    c1.execute("SELECT rowid FROM pizzas WHERE pizza_type = 'Barbeque'")
+    if len(c1.fetchall())==0:
+        c1.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", (str('Barbeque'), int(12), str("Chicken, Mozarella Cheese, Mushrooms, BBQ Sauce"), int(1)))
+        conn1.commit()
+    c1.execute("SELECT rowid FROM pizzas WHERE pizza_type = 'Pepperoni'")
+    if len(c1.fetchall())==0:
+        c1.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", (str('Pepperoni'), int(10), str("Ultra Pepperoni, Mozarella Cheese"), int(2)))
+        conn1.commit()
+    c1.execute("SELECT rowid FROM pizzas WHERE pizza_type = 'BlankPizza'")
+    if len(c1.fetchall())==0:
+        c1.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", (str('BlankPizza'), int(5), str("Tomato"), int(3)))
+        conn1.commit()
     conn1.commit()
     root = Tk()
     root.geometry("400x500+70+42")
