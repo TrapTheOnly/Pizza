@@ -6,11 +6,13 @@ import sqlite3
 
 class Checkout:
 
-    pizza = Pizza.PizzaBuilder('Barbeque')
+    pizza = 0
     frame = 0
     price = 0
     
-    def __init__(self, pizza, login):
+    def __init__(self, pizza, login, pizza_type):
+        self.pizza = Pizza.PizzaBuilder(str(pizza_type))
+        self.pizza_type = pizza_type
         self.login = login
         self.conn = sqlite3.connect('users.db')
         self.c = self.conn.cursor()
@@ -20,7 +22,7 @@ class Checkout:
         self.pizza = pizza_ex
         self.frame = Tk()
         self.frame.geometry("420x793+70+0")
-        self.frame.title("Barbeque Pizza Checkout")
+        self.frame.title("Pizza Checkout")
         self.frame.resizable(0,0)
         self.frame.configure(background="#f2aca5")
         self.checkout_func()
@@ -216,7 +218,7 @@ class Checkout:
         self.label_price = Label(self.frame, text = self.price, bg = '#f2aca5',
                                 fg = 'black', font = 'Times 32 bold')
         self.label_price.grid(row = 20+self.rows_count, column = 0, columnspan = 3, sticky = N)
-        self.add_order("Barbeque", str(self.login), str(self.price))
+        self.add_order(str(self.pizza_type), str(self.login), str(self.price))
 
     def listToString(self, s):
         str1 = ""  

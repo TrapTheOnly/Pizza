@@ -1,34 +1,36 @@
 from tkinter import *
 from tkinter.font import *
-import Pizza
+from Pizza import *
 import User_Menu
-import Barbeque_Checkout
+import Pizza_Checkout
 
 
-class BBQ:
+class Pizza:
     
     frame=0
     print_added=0
     pizza = 0
+    pizza_type = 0
 
-    def __init__(self, login):
+    def __init__(self, login, pizza_type):
+        self.pizza_type = pizza_type
         self.login = login
         self.options()
     
     def options(self):
         self.frame = Tk()
         self.frame.geometry("420x793+70+0")
-        self.frame.title("Barbeque Pizza")
+        self.frame.title("Pizza")
         self.frame.resizable(0,0)
         self.frame.configure(background="#f2aca5")
         self.bbq = PhotoImage(file = 'Photos/bbq_resized_gif.gif')
         self.cheese = PhotoImage(file = 'Photos/cheese_resized_gif.gif')
         self.ketchup = PhotoImage(file = 'Photos/ketchup_resized_gif.gif')
         self.beef = PhotoImage(file = 'Photos/beef_resized_gif.gif')
-        self.label1 = Label(self.frame, text='Barbeque Pizza', font='Times 32 bold', 
+        self.label1 = Label(self.frame, text='Pizza', font='Times 32 bold', 
                             bg = '#f2aca5', fg = '#10c200')
         self.label1.grid(row=1, column=0, columnspan = 3, sticky =N)
-        self.pizza = Pizza.PizzaBuilder('Barbeque')
+        self.pizza = PizzaBuilder(str(self.pizza_type))
         
         #-------------------additional food----------------------
         self.label2  = Label(self.frame, text = 'Any additions to your pizza?', 
@@ -127,5 +129,6 @@ class BBQ:
         self.button2.after(400, self.button2.invoke)
 
     def checkout(self):
-        check = Barbeque_Checkout.Checkout(self.pizza, self.login)
+        check = Pizza_Checkout.Checkout(self.pizza, self.login, self.pizza_type)
+        #print("Works until here")
         self.frame.destroy()

@@ -1,9 +1,9 @@
 import abc
 from abc import ABCMeta
+import sqlite3
 
 
 class Pizza(metaclass=abc.ABCMeta):
-
     @abc.abstractmethod
     def get_price(self):
         pass
@@ -11,24 +11,20 @@ class Pizza(metaclass=abc.ABCMeta):
     def get_status(self):
         pass
 
-class Barbeque(Pizza):
-    
-    pizza_price=12
-    def get_price(self):
-        return self.pizza_price
-    def get_status(self):
-        return "Chicken, Mozarella Cheese, Mushrooms, BBQ Sauce"
 
-class Pepperoni(Pizza):
-    pizza_price=10
+class Pizza_None(Pizza):
+    pizza_price=0
+    def __init__(self, ingredients, price):
+        self.pizza_price = price
+        self.ingredients = ingredients
     def get_price(self):
         return self.pizza_price
     def get_status(self):
-        return "Ultra Pepperoni, Mozarella Cheese"
+        return self.ingredients
 
 class PizzaDecorator(Pizza):
-    def __init__(self, pizza_type):
-        self.pizza=pizza_type
+    def __init__(self, pizza):
+        self.pizza=pizza
     
     def get_price(self):
         return self.pizza.get_price()
@@ -38,19 +34,19 @@ class PizzaDecorator(Pizza):
 
 
 class UltraPepperoni(PizzaDecorator):
-	def __init__(self, pizza):
-		super(UltraPepperoni, self).__init__(pizza)
-		self.__upepperoni_price = 2
+    def __init__(self, pizza):
+        super(UltraPepperoni, self).__init__(pizza)
+        self.__upepperoni_price = 2
 
-	@property
-	def price(self):
-		return self.__upepperoni_price
+    @property
+    def price(self):
+        return self.__upepperoni_price
 
-	def get_price(self):
-		return super(UltraPepperoni, self).get_price() + self.__upepperoni_price
+    def get_price(self):
+        return super(UltraPepperoni, self).get_price() + self.__upepperoni_price
 
-	def get_status(self):
-		return super(UltraPepperoni, self).get_status() + ", Ultra Pepperoni" 
+    def get_status(self):
+        return super(UltraPepperoni, self).get_status() + ", Ultra Pepperoni" 
 
 class ExtraCheese(PizzaDecorator):
 	def __init__(self, pizza):
@@ -147,9 +143,27 @@ class ExtraKetchup(PizzaDecorator):
 class PizzaBuilder:
 
     def __init__(self, pizza_type):
-        self.pizza_type=pizza_type
-        self.pizza = eval(pizza_type)()
-        self.extentions_list=[]
+        self.conn = sqlite3.connect('pizza.db')
+        self.c = self.conn.cursor()
+        self.pizza = 0
+        self.extentions_list = []
+        try:
+        	self.c.execute("""CREATE TABLE pizzas (
+        			pizza_type text,
+        			pizza_price integer,
+        			ingredients text
+        	)""")
+        except:
+        	pass
+        self.conn.commit()
+        self.c.execute("SELECT rowid FROM pizzas WHERE pizza_type = ?", (str(pizza_type),))
+        if len(self.c.fetchall())!=0:
+            self.c.execute("SELECT pizza_price FROM pizzas WHERE pizza_type = ?", (str(pizza_type),))
+            self.pizza_price = int(list(self.c.fetchone())[0])
+            self.c.execute("SELECT ingredients FROM pizzas WHERE pizza_type = ?", (str(pizza_type),))
+            self.ingredients = str(list(self.c.fetchone())[0])
+            self.pizza_type=pizza_type
+            self.pizza = Pizza_None(self.ingredients, self.pizza_price)
     
     def add_extention(self, extention):
         self.pizza=eval(extention)(self.pizza)

@@ -137,6 +137,20 @@ def main():
         pass
     #c.execute("DELETE FROM users WHERE login = 'Ismail'")
     conn.commit()
+    conn1 = sqlite3.connect('pizza.db')
+    c1 = conn1.cursor()
+    try:
+        c1.execute("""CREATE TABLE pizzas (
+        		pizza_type text,
+        		pizza_price integer,
+        		ingredients text,
+                id integer
+        )""")
+    except:
+        pass
+    #c1.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", (str('Barbeque'), int(12), str("Chicken, Mozarella Cheese, Mushrooms, BBQ Sauce"), int(1)))
+    #c1.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", (str('Pepperoni'), int(10), str("Ultra Pepperoni, Mozarella Cheese"), int(2)))
+    conn1.commit()
     root = Tk()
     root.geometry("400x500+70+42")
     root.title("Pizza App Login")
