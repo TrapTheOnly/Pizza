@@ -8,7 +8,6 @@ import sqlite3
 
 class user_menu:
     frame1=0
-    frame2=0
     def __init__(self, frame, name, row_count):
         self.row_count = row_count
         self.conn = sqlite3.connect('users.db')
@@ -17,17 +16,17 @@ class user_menu:
         self.c1 = self.conn1.cursor()
         self.username = name
         self.frame1 = frame
-        self.frame2 = frame
         self.font1 = Font(family="Times", size="32", weight="bold")
         self.font2 = Font(family="Times", size="22", weight="bold")
-        self.tab = Label(frame, text = '    ', bg = '#f2aca5', font = self.font2)
-        self.space = Label(frame, text = '\n\n\n', bg='#f2aca5', font = self.font1)
+        self.tab = Label(frame, text = '  ', bg = '#f2aca5', font = self.font2)
+        self.space = Label(frame, text = '\n', bg='#f2aca5', font = self.font1)
         Label(frame, text = 'Hi '+str(self.username), font = 'Times 26 bold', 
                 bg = "#f2aca5", fg = 'black').grid(row = 0, column = 0,
                 columnspan = 1, sticky = W)
+        self.tab.grid(row = 0, column = 1)
         self.get_orders = Button(frame, text="Get Orders History", bg='#f2aca5',
                                 font = self.font2, fg='black',
-                                activebackground = '#f2aca5', command = self.orders)
+                                activebackground = '#f2aca5', command = lambda:  self.orders(frame))
         self.get_orders.grid(row = 0, column = 2) 
         self.bbq_list = ['Chicken, Mozarella Cheese,', 'Mushrooms, BBQ Sauce']
         self.peppe_list = ['Pepperoni', 'Mozarella Cheese']
@@ -49,6 +48,8 @@ class user_menu:
             self.pizza_vars[i]=IntVar()
             self.c1.execute("SELECT pizza_type FROM pizzas WHERE id = ?", (i, ))
             a = str(list(self.c1.fetchone())[0])
+            #if a=='Margheritta':
+            #    print("found it")
             #pizza_name = str(list(self.c1.fetchone())[0])
             self.pizza_checks[i] = Checkbutton(frame, 
                         text = a, bg = '#f2aca5',
@@ -70,6 +71,11 @@ class user_menu:
         #                            font = self.font2, fg='black',
         #                            activebackground = '#f2aca5', variable=self.peppe)
         #self.button2.grid(row=7, column=0)
+        file = open("notifications.txt")
+        line = file.readline()
+        Label(frame, text = line, font = 'Times 18 italic', bg = '#f2aca5', 
+                fg = 'gray').grid(row = 8+self.row_count, column = 0, columnspan = 3)
+        file.close()
         self.bbq_ingredients = Label(frame, text = self.bbq_list[0]+'\n'+self.bbq_list[1],
                                      font = 'Times 12 bold', fg = 'gray', bg = '#f2aca5')
         #self.bbq_ingredients.grid(row=7, column = 0, sticky = S, rowspan = 2)
@@ -77,12 +83,12 @@ class user_menu:
                                         self.peppe_list[1], font = 'Times 12 bold',
                                         fg = 'gray', bg = '#f2aca5')
         #self.peppe_ingredients.grid(row=7, column = 2, sticky = S, rowspan = 2)
-        self.space.grid(row = 9, column = 0, columnspan = 3)
+        self.space.grid(row = 9+self.row_count, column = 0, columnspan = 3)
         self.choice_button = Button(frame, text="Submit choice", bg='#f2aca5',
                                     font = self.font2, fg='black',
                                     activebackground = '#f2aca5', command = self.choice)
         #self.tab.grid(row = 9, column = 1)       
-        self.choice_button.grid(row=9, column = 0, columnspan = 3)
+        self.choice_button.grid(row=9+self.row_count, column = 0, columnspan = 3)
     def choice(self):
         #print(self.pizza_vars)
         #print (self.bbq.get())
@@ -98,7 +104,7 @@ class user_menu:
             self.label2 = Label(self.frame1,
                                 text = "Choose only one type of Pizza!",
                                  bg='#f2aca5', font = self.font2, fg='black')
-            self.label2.grid(row=12, column=0, columnspan = 3)
+            self.label2.grid(row=10+self.row_count, column=0, columnspan = 3)
             button1 = Button(self.frame1, text = 'Kill label', command = self.label2.destroy)
             button1.after(2000, button1.invoke)
         elif(self.pizza_list.count(1)==0):
@@ -106,17 +112,23 @@ class user_menu:
             self.label2 = Label(self.frame1,
                                 text = "Choose something before clicking!",
                                  bg='#f2aca5', font = self.font2, fg='black')
-            self.label2.grid(row=12, column=0, columnspan = 3)
+            self.label2.grid(row=10+self.row_count, column=0, columnspan = 3)
             button1 = Button(self.frame1, text = 'Kill label', command = self.label2.destroy)
             button1.after(2000, button1.invoke)
 
-    def orders(self):
-        self.frame1.geometry("427x636+70+42")
-        Label(self.frame1, text = '\n', bg = '#f2aca5', 
-            font = 'Times 3 bold').grid(row = 11, column = 0, columnspan = 3)
-        self.print_orders = Text(self.frame1, font = self.font2,
-                                height = 5, width = 28)
-        self.print_orders.grid(row = 12, column = 0, columnspan = 3, sticky = S)
+    def orders(self, frame):
+        #self.frame1.geometry("427x636+70+42")
+        #Label(frame, text = '\n', bg = '#f2aca5', 
+        #    font = 'Times 3 bold').grid(row = 11+self.row_count, column = 0, columnspan = 3)
+        self.size = "427x"
+        self.height = 636+(self.row_count-3)*10
+        self.size+=str(self.height)
+        self.size+= "+70+42"
+        #print(self.size)
+        #frame.geometry("427x716+70+42")
+        self.print_orders = Text(frame, font = 'Times 16 bold',
+                                height = 5, width = 38)
+        self.print_orders.grid(row = 10+self.row_count, column = 0, columnspan = 3, sticky = S)
         self.c.execute("SELECT * FROM users WHERE login = ?", (str(self.username),))
         self.list = list(self.c.fetchone())
         self.data = ""
@@ -124,15 +136,15 @@ class user_menu:
             self.data += str(self.list[2])
             self.data += '\n'
         self.print_orders.insert(INSERT, self.data)
-        self.button3 = Button(self.frame1, command = lambda: {self.print_orders.destroy(), self.frame1.geometry("427x636+70+42")})
-        self.button3.after(3000, self.button3.invoke)
+        self.button3 = Button(frame, command = lambda: self.print_orders.destroy())
+        self.button3.after(2000, self.button3.invoke)
 
     def pizza_func(self, id):
         #print("BBQ")
         self.c1.execute("SELECT pizza_type FROM pizzas WHERE id = ?", (int(id),))
         self.pizza_type = str(list(self.c1.fetchone())[0])
         self.frame1.destroy()
-        bbq_obj=Pizza_Order.Pizza(self.username,self.pizza_type)
+        pizza_obj=Pizza_Order.Pizza(self.username,self.pizza_type)
 
 
 def game(login):
@@ -140,9 +152,8 @@ def game(login):
     c = conn.cursor()
     c.execute("select count(*) from pizzas")
     row_count = c.fetchone()
-    size = ''
-    size += "427x"
-    height = 636+(row_count[0]-2)*10
+    size = "427x"
+    height = 636+(row_count[0]-3)*10
     size+=str(height)
     size+= "+70+42"
     root = Tk()

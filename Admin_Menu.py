@@ -90,14 +90,17 @@ class admin_menu:
         c.execute("select count(*) from pizzas")
         row_count = c.fetchone()
         ingredients = str(self.entry_ings.get(1.0, END))
-        print(ingredients)
+        #print(ingredients)
         c.execute("SELECT rowid FROM pizzas WHERE pizza_type = ?", (str(self.entry_name.get()),))
         if len(c.fetchall())==0:
             c.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", 
                         (str(self.entry_name.get()), int(self.entry_price.get()), 
                         str(self.entry_ings.get(1.0, END)), int(row_count[0]+1)))
             conn1.commit()
-            print("added")
+            #print("added")
+            file = open("notifications.txt", 'w')
+            file.write("New pizza added - {}!".format(str(self.entry_name.get())))
+            file.close()
             Label(self.frame1, text = 'Added!', font = 'Times 22 bold',
                 bg = '#f2aca5').pack()
             self.frame1.after(2000, self.frame1.destroy)

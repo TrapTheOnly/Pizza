@@ -38,7 +38,7 @@ class Checkout:
                                     fg = '#10c200', font = 'Times 32 bold')
         self.rows_count=1
         if(len(self.status)==0):
-            self.print_ingredients = Label(self.frame,text='     Additions: You added nothing!',
+            self.print_ingredients = Label(self.frame,text='Additions: You added nothing!',
                                     bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
             self.label_checkout = Label(self.frame, text = ' Checkout', bg = '#f2aca5',
                                     fg = '#10c200', font = 'Times 32 bold')
@@ -46,30 +46,30 @@ class Checkout:
         elif(len(self.status)==1):
             self.check=True
             if(self.status[0]=='ExtraBBQSauce'):
-                self.extention = '      Additions: '
+                self.extention = 'Additions: '
                 self.extention += self.listToString(self.status)
                 self.print_ingredients = Label(self.frame,text=self.extention,
                                     bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
-                self.label_checkout = Label(self.frame, text = '   Checkout', bg = '#f2aca5',
-                                    fg = '#10c200', font = 'Times 32 bold')
+                #self.label_checkout = Label(self.frame, text = '   Checkout', bg = '#f2aca5',
+                #                    fg = '#10c200', font = 'Times 32 bold')
             elif(self.status[0]=='ExtraKetchup'):
-                self.label_checkout = Label(self.frame, text = '      Checkout', bg = '#f2aca5',
-                                    fg = '#10c200', font = 'Times 32 bold')
-                self.extention = '         Additions: '
+                #self.label_checkout = Label(self.frame, text = '      Checkout', bg = '#f2aca5',
+                #                    fg = '#10c200', font = 'Times 32 bold')
+                self.extention = 'Additions: '
                 self.extention += self.listToString(self.status)
                 self.print_ingredients = Label(self.frame,text=self.extention,
                                     bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
             elif(self.status[0]=='Beef'):
-                self.label_checkout = Label(self.frame, text = '           Checkout', bg = '#f2aca5',
-                                    fg = '#10c200', font = 'Times 32 bold')
-                self.extention = '\tAdditions: '
+                #self.label_checkout = Label(self.frame, text = '           Checkout', bg = '#f2aca5',
+                #                    fg = '#10c200', font = 'Times 32 bold')
+                self.extention = 'Additions: '
                 self.extention += self.listToString(self.status)
                 self.print_ingredients = Label(self.frame,text=self.extention,
                                     bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
             elif(self.status[0]=='ExtraCheese'):
-                self.label_checkout = Label(self.frame, text = '      Checkout', bg = '#f2aca5',
-                                    fg = '#10c200', font = 'Times 32 bold')
-                self.extention = '          Additions: '
+                #self.label_checkout = Label(self.frame, text = '      Checkout', bg = '#f2aca5',
+                #                    fg = '#10c200', font = 'Times 32 bold')
+                self.extention = 'Additions: '
                 self.extention += self.listToString(self.status)
                 self.print_ingredients = Label(self.frame,text=self.extention,
                                     bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
@@ -97,13 +97,13 @@ class Checkout:
                         self.rows_count+=1
                         self.print_status+='\n'
         #print (self.listToString(self.print_status))
-        self.label_checkout.grid(row = 1, column = 0, columnspan = 3, sticky = N)
+        self.label_checkout.place(height = 40, width = 200, x = 110, y = 20)
         self.space = Label(self.frame, text = '\n\n\n', bg='#f2aca5')
         self.space.grid(row = 2, column = 0, columnspan = 3)
         if(len(self.status)>1):
             self.print_ingredients = Label(self.frame,text=self.listToString(self.print_status),
                                     bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
-        self.print_ingredients.grid(row = 4, column=0, columnspan=3, sticky=W)
+        self.print_ingredients.place(x = 20, y = 100)
         #print(self.pizza.extentions_list)
 
         #---------------Remove extention------------------
@@ -116,13 +116,13 @@ class Checkout:
                                     width = 20, height = 3,
                                     font = 'Times 12 bold',
                                     activebackground = 'red', command = self.remove_cheese)
-        self.cheese_button.grid(row = 9+self.rows_count, column = 0)
+        self.cheese_button.place(x=10, y=250, width = 180)
         self.beef_button = Button(self.frame, text='Remove Beef', 
                                     bg = '#f2aca5', fg = 'black', 
                                     width = 20, height = 3,
                                     font = 'Times 12 bold',
                                     activebackground = 'red', command = self.remove_beef)
-        self.beef_button.grid(row = 9+self.rows_count, column = 2)
+        self.beef_button.place(x=230, y = 250, width = 180)
         self.space = Label(self.frame, text = '\n\n', bg='#f2aca5')
         self.space.grid(row = 10+self.rows_count, column = 0, columnspan = 3)
         self.bbq_button = Button(self.frame, text='Remove BBQ Sauce', 
@@ -130,13 +130,13 @@ class Checkout:
                                     width = 20, height = 3,
                                     font = 'Times 12 bold',
                                     activebackground = 'red', command = self.remove_BBQ)
-        self.bbq_button.grid(row = 12+self.rows_count, column = 0)
+        self.bbq_button.place(x=10, y=370, width = 180)
         self.ketchup_button = Button(self.frame, text='Remove Ketchup', 
                                     bg = '#f2aca5', fg = 'black', 
                                     width = 20, height = 3,
                                     font = 'Times 12 bold',
                                     activebackground = 'red', command = self.remove_Ketchup)
-        self.ketchup_button.grid(row = 12+self.rows_count, column = 2)
+        self.ketchup_button.place(x = 230, y = 370, width = 180)
 
         #-------------------------Get Price---------------------
         self.price_button = Button(self.frame, text = 'Get Price', 
@@ -144,9 +144,9 @@ class Checkout:
                                     width = 20, height = 3,
                                     font = 'Times 12 bold',
                                     activebackground = 'red', command = self.get_price)
-        self.big_space.grid(row = 14+self.rows_count, column = 0, columnspan = 3)
-        self.price_button.grid(row=17+self.rows_count, column = 0, columnspan = 3, sticky =N)
-        self.space.grid(row = 18+self.rows_count, column = 0, columnspan = 3)
+        #self.big_space.grid(row = 14+self.rows_count, column = 0, columnspan = 3)
+        self.price_button.place(x = 135, y = 490, width = 150)
+        #self.space.grid(row = 18+self.rows_count, column = 0, columnspan = 3)
 
     def add_order(self, pizza_type, login, price):
         self.c.execute("SELECT orders FROM users WHERE login = ?", (str(login), ))
@@ -155,9 +155,12 @@ class Checkout:
         if self.orders_list == 'None':
             self.orders_list = ""
         self.orders_list += str(pizza_type)
+        for i in range(len(self.pizza.extentions_list)):
+            self.orders_list += '+'
+            self.orders_list += str(self.pizza.extentions_list[i])
         self.orders_list += ' - '
         self.orders_list += str(price) + '$'
-        self.orders_list += ', '
+        self.orders_list += '\n'
         self.c.execute("UPDATE users SET orders = ? WHERE login = ?", (self.orders_list, str(login),))
         self.conn.commit()
 
@@ -170,7 +173,7 @@ class Checkout:
         else:
             self.label_error = Label(self.frame, text = 'No such addition for your Pizza',
                                 bg = '#f2aca5', fg = 'black', font = 'Times 18 bold')
-            self.label_error.grid(row = 13+self.rows_count, column = 0, columnspan = 3, sticky = S)
+            self.label_error.place(x=50, y = 600)
             self.button1 = Button(self.frame, command = self.label_error.destroy)
             self.button1.after(400, self.button1.invoke)
         
@@ -183,7 +186,7 @@ class Checkout:
         else:
             self.label_error = Label(self.frame, text = 'No such addition for your Pizza',
                                 bg = '#f2aca5', fg = 'black', font = 'Times 18 bold')
-            self.label_error.grid(row = 13+self.rows_count, column = 0, columnspan = 3, sticky = S)
+            self.label_error.place(x=50, y = 600)
             self.button1 = Button(self.frame, command = self.label_error.destroy)
             self.button1.after(400, self.button1.invoke)
     
@@ -196,7 +199,7 @@ class Checkout:
         else:
             self.label_error = Label(self.frame, text = 'No such addition for your Pizza',
                                 bg = '#f2aca5', fg = 'black', font = 'Times 18 bold')
-            self.label_error.grid(row = 13+self.rows_count, column = 0, columnspan = 3, sticky = S)
+            self.label_error.place(x=50, y = 600)
             self.button1 = Button(self.frame, command = self.label_error.destroy)
             self.button1.after(400, self.button1.invoke)
 
@@ -209,15 +212,15 @@ class Checkout:
         else:
             self.label_error = Label(self.frame, text = 'No such addition for your Pizza',
                                 bg = '#f2aca5', fg = 'black', font = 'Times 18 bold')
-            self.label_error.grid(row = 13+self.rows_count, column = 0, columnspan = 3, sticky = S)
+            self.label_error.place(x=50, y = 600)
             self.button1 = Button(self.frame, command = self.label_error.destroy)
             self.button1.after(400, self.button1.invoke)
 
     def get_price(self):
         self.price = self.pizza.get_price()
-        self.label_price = Label(self.frame, text = self.price, bg = '#f2aca5',
+        self.label_price = Label(self.frame, text = 'Price: '+ str(self.price), bg = '#f2aca5',
                                 fg = 'black', font = 'Times 32 bold')
-        self.label_price.grid(row = 20+self.rows_count, column = 0, columnspan = 3, sticky = N)
+        self.label_price.place(x = 120, y = 650)
         self.add_order(str(self.pizza_type), str(self.login), str(self.price))
 
     def listToString(self, s):
