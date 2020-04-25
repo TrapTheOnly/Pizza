@@ -3,6 +3,7 @@ from tkinter.font import *
 import User_Menu
 import Pizza
 import sqlite3
+from datetime import datetime
 
 class Checkout:
 
@@ -127,7 +128,8 @@ class Checkout:
             self.orders_list += '+'
             self.orders_list += str(self.pizza.extentions_list[i])
         self.orders_list += ' - '
-        self.orders_list += str(price) + '$'
+        self.orders_list += str(price) + '$ - '
+        self.orders_list += str(datetime.now())
         self.orders_list += '\n'
         self.c.execute("UPDATE users SET orders = ? WHERE login = ?", (self.orders_list, str(login),))
         self.conn.commit()
