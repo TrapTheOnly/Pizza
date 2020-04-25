@@ -43,37 +43,6 @@ class Checkout:
             self.print_ingredients.insert(1.0, 'Additions: You added nothing!')
             self.label_checkout = Label(self.frame, text = ' Checkout', bg = '#f2aca5',
                                     fg = '#10c200', font = 'Times 32 bold')
-        
-        #elif(len(self.status)==1):
-            #self.check=True
-            #if(self.status[0]=='ExtraBBQSauce'):
-            #    self.extention = 'Additions: '
-            #    self.extention += self.listToString(self.status)
-            #    self.print_ingredients = Label(self.frame,text=self.extention,
-            #                        bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
-            #    #self.label_checkout = Label(self.frame, text = '   Checkout', bg = '#f2aca5',
-            #    #                    fg = '#10c200', font = 'Times 32 bold')
-            #elif(self.status[0]=='ExtraKetchup'):
-            #    #self.label_checkout = Label(self.frame, text = '      Checkout', bg = '#f2aca5',
-            #    #                    fg = '#10c200', font = 'Times 32 bold')
-            #    self.extention = 'Additions: '
-            #    self.extention += self.listToString(self.status)
-            #    self.print_ingredients = Label(self.frame,text=self.extention,
-            #                        bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
-            #elif(self.status[0]=='Beef'):
-            #    #self.label_checkout = Label(self.frame, text = '           Checkout', bg = '#f2aca5',
-            #    #                    fg = '#10c200', font = 'Times 32 bold')
-            #    self.extention = 'Additions: '
-            #    self.extention += self.listToString(self.status)
-            #    self.print_ingredients = Label(self.frame,text=self.extention,
-            #                        bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
-            #elif(self.status[0]=='ExtraCheese'):
-            #    #self.label_checkout = Label(self.frame, text = '      Checkout', bg = '#f2aca5',
-            #    #                    fg = '#10c200', font = 'Times 32 bold')
-            #    self.extention = 'Additions: '
-            #    self.extention += self.listToString(self.status)
-            #    self.print_ingredients = Label(self.frame,text=self.extention,
-            #                        bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
         elif(len(self.status)>0):
             self.print_status+='Additions: '
         if(len(self.status)>0):
@@ -97,7 +66,6 @@ class Checkout:
                     if(i%4==1):
                         self.rows_count+=1
                         self.print_status+='\n'
-        #print (self.listToString(self.print_status))
         self.label_checkout.place(height = 40, width = 200, x = 110, y = 20)
         self.space = Label(self.frame, text = '\n\n\n', bg='#f2aca5')
         self.space.grid(row = 2, column = 0, columnspan = 3)
@@ -108,7 +76,6 @@ class Checkout:
                                     width = 29, height = 4)
             self.print_ingredients.insert(1.0, self.listToString(self.print_status))
         self.print_ingredients.place(x = 7, y = 100)
-        #print(self.pizza.extentions_list)
 
         #---------------Remove extention------------------
         self.label_error = Label(self.frame, text = 'No such addition for your Pizza',
@@ -148,14 +115,11 @@ class Checkout:
                                     width = 20, height = 3,
                                     font = 'Times 12 bold',
                                     activebackground = 'red', command = self.get_price)
-        #self.big_space.grid(row = 14+self.rows_count, column = 0, columnspan = 3)
         self.price_button.place(x = 135, y = 450, width = 150)
-        #self.space.grid(row = 18+self.rows_count, column = 0, columnspan = 3)
 
     def add_order(self, pizza_type, login, price):
         self.c.execute("SELECT orders FROM users WHERE login = ?", (str(login), ))
         self.orders_list = str(list(self.c.fetchone())[0])
-        #print(self.orders_list)
         if self.orders_list == 'None':
             self.orders_list = ""
         self.orders_list += str(pizza_type)

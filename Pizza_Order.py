@@ -89,8 +89,6 @@ class Pizza:
         self.button1 = Button(self.frame, 
                             command = self.print_added.configure(text='Added Cheese'))
         self.button1.after(10, self.button1.invoke)
-        #print(self.pizza.get_price(),'$')
-        #print(self.pizza.get_status())
         self.button2 = Button(self.frame,
                             command = lambda: self.print_added.configure(text='\t\t'))
         self.button2.after(400, self.button2.invoke)
@@ -100,8 +98,6 @@ class Pizza:
         self.button1 = Button(self.frame, 
                             command = self.print_added.configure(text='Added Beef'))
         self.button1.after(10, self.button1.invoke)
-        #print(self.pizza.get_price(),'$')
-        #print(self.pizza.get_status())
         self.button2 = Button(self.frame,
                             command = lambda: self.print_added.configure(text='\t\t'))
         self.button2.after(400, self.button2.invoke)
@@ -111,8 +107,6 @@ class Pizza:
         self.button1 = Button(self.frame, 
                             command = self.add_sauce.configure(text='Added BBQ Sauce'))
         self.button1.after(10, self.button1.invoke)
-        #print(self.pizza.get_price(),'$')
-        #print(self.pizza.get_status())
         self.button2 = Button(self.frame,
                             command = lambda: self.add_sauce.configure(text='\t\t'))
         self.button2.after(400, self.button2.invoke)
@@ -122,13 +116,10 @@ class Pizza:
         self.button1 = Button(self.frame, 
                             command = self.add_sauce.configure(text='Added Ketchup'))
         self.button1.after(10, self.button1.invoke)
-        #print(self.pizza.get_price(),'$')
-        #print(self.pizza.get_status())
         self.button2 = Button(self.frame,
                             command = lambda: self.add_sauce.configure(text='\t\t'))
         self.button2.after(400, self.button2.invoke)
 
     def checkout(self):
         check = Pizza_Checkout.Checkout(self.pizza, self.login, self.pizza_type)
-        #print("Works until here")
         self.frame.destroy()

@@ -33,7 +33,6 @@ class admin_menu:
         Label(self.root, text = '', bg = '#f2aca5').pack()
         self.data_get = Text(self.root, width = 29, height = 8,
                             font = 'Times 18 bold')
-        #self.data_get.config(state = DISABLED)
         self.data_get.pack()
 
     def check(self):
@@ -85,19 +84,16 @@ class admin_menu:
     def add_pizza(self):
         conn1 = sqlite3.connect('pizza.db')
         c = conn1.cursor()
-        #c.execute("DELETE FROM pizzas WHERE pizza_type = 'Margheritta'")
         conn1.commit()
         c.execute("select count(*) from pizzas")
         row_count = c.fetchone()
         ingredients = str(self.entry_ings.get(1.0, END))
-        #print(ingredients)
         c.execute("SELECT rowid FROM pizzas WHERE pizza_type = ?", (str(self.entry_name.get()),))
         if len(c.fetchall())==0:
             c.execute("INSERT INTO pizzas VALUES (?, ?, ?, ?)", 
                         (str(self.entry_name.get()), int(self.entry_price.get()), 
                         str(self.entry_ings.get(1.0, END)), int(row_count[0]+1)))
             conn1.commit()
-            #print("added")
             file = open("notifications.txt", 'w')
             file.write("New pizza added - {}!".format(str(self.entry_name.get())))
             file.close()

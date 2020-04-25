@@ -41,16 +41,12 @@ class main_menu:
             self.c.execute("SELECT rowid FROM users WHERE login = ?", (str(self.login_username.get()),))
             user =  User(self.login_username.get(), self.login_password.get(), self.db)
             if len(self.c.fetchall()) == 0:
-                #user.add_order('Barbeque', self.login_username.get(), '12')
                 self.label1 = Label(self.root, text = 'No such user. Registered new!\nYou can now log in!', 
                         bg = '#f2aca5', fg = 'black', 
                         font = 'Times 14 bold')
                 self.label1.pack()
                 self.login_password.delete(0, len(self.login_password.get()))
                 self.login_username.delete(0, len(self.login_username.get()))
-                #user.add_order('Barbeque', self.login_username.get(), '12')
-                #self.button2 = Button(self.root, command = self.run_new_screen())
-                #self.button2.after(2000, self.button2.invoke)
                 def run_new_screen(self):
                     self.root.destroy()
                     User_Menu.game(self.name_user)
@@ -62,12 +58,9 @@ class main_menu:
                         bg = '#f2aca5', fg = 'black', 
                         font = self.font2)
                     self.label2.pack()
-                    #user.add_order('Barbeque', self.login_username.get(), '12')
                     button1 = Button(self.root, command = self.label2.destroy)
                     button1.after(2000, button1.invoke)
-                    #self.label2.after(1000 , lambda: self.label2.destroy())
                 else:
-                    #user.add_order('Pepperoni', self.login_username.get(), '10')
                     self.root.destroy()
                     User_Menu.game(self.name_user)
         else:
@@ -79,32 +72,23 @@ class main_menu:
                     bg = '#f2aca5', fg = 'black', 
                     font = self.font2)
                 self.label2.pack()
-                #user.add_order('Barbeque', self.login_username.get(), '12')
                 button1 = Button(self.root, command = self.label2.destroy)
                 button1.after(2000, button1.invoke)
-                #self.label2.after(1000 , lambda: self.label2.destroy())
-    #def run_new_screen(self):
-    #    self.root.destroy()
-    #    User_Menu.game(self.name_user)
+
 class User:
     def __init__(self, login, password, db):
         self.login = login
-        #print(login)
         self.db = db
         self.password = password
-        #print(password)
         self.c = self.db.cursor()
         self.c.execute("SELECT rowid FROM users WHERE login = ?", (str(self.login),))
         if len(self.c.fetchall())==0:
             self.c.execute("INSERT INTO users VALUES (?, ?, ?)", (str(self.login), str(self.password), 'None',))
-        #self.c.execute("SELECT * FROM users WHERE login = ?", (str(self.login), ))
-        #print(self.c.fetchone())
         self.db.commit()
 
     def add_order(self, pizza_type, login, price):
         self.c.execute("SELECT orders FROM users WHERE login = ?", (str(login), ))
         self.orders_list = str(list(self.c.fetchone())[0])
-        #print(self.orders_list)
         if self.orders_list == 'None':
             self.orders_list = ""
         self.orders_list += str(pizza_type)
@@ -135,7 +119,6 @@ def main():
         )""")
     except:
         pass
-    #c.execute("DELETE FROM users WHERE login = 'Ismail'")
     conn.commit()
     conn1 = sqlite3.connect('pizza.db')
     c1 = conn1.cursor()

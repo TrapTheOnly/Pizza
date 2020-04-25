@@ -38,7 +38,6 @@ class user_menu:
         self.peppe_photo = PhotoImage(file="Photos/pepperoni_edited_gif.gif")
         self.print_bbq = Label(frame, image=self.bbq_photo,
                                 bg='#f2aca5', height=220, width = 320)
-        #self.print_bbq.grid(row=3, column=0, rowspan=3, sticky=W)
         self.pizza_vars = {}
         self.row = 6
         self.pizza_checks = {}
@@ -48,9 +47,6 @@ class user_menu:
             self.pizza_vars[i]=IntVar()
             self.c1.execute("SELECT pizza_type FROM pizzas WHERE id = ?", (i, ))
             a = str(list(self.c1.fetchone())[0])
-            #if a=='Margheritta':
-            #    print("found it")
-            #pizza_name = str(list(self.c1.fetchone())[0])
             self.pizza_checks[i] = Checkbutton(frame, 
                         text = a, bg = '#f2aca5',
                         font = self.font2, fg = 'black', 
@@ -59,18 +55,6 @@ class user_menu:
                         onvalue = 1, offvalue = 0)
             self.pizza_checks[i].grid(row = self.row, column = 0, columnspan = 3)
             self.row+=1
-        #self.button1 = Checkbutton(frame, text="Barbeque",
-        #                            bg='#f2aca5', font = self.font2, fg='black',
-        #                            activebackground = '#f2aca5', variable=self.bbq)
-        #self.button1.grid(row=6, column=0)
-        #self.tab.grid(row = 6, column = 0)
-        #self.print_peppe = Label(frame, image=self.peppe_photo,
-        #                        bg='#f2aca5', height=220, width = 320)
-        #self.print_peppe.grid(row=3, column=2, rowspan=3, sticky=E)
-        #self.button2 = Checkbutton(frame, text="Pepperoni", bg='#f2aca5',
-        #                            font = self.font2, fg='black',
-        #                            activebackground = '#f2aca5', variable=self.peppe)
-        #self.button2.grid(row=7, column=0)
         file = open("notifications.txt")
         line = file.readline()
         Label(frame, text = line, font = 'Times 18 italic', bg = '#f2aca5', 
@@ -78,21 +62,15 @@ class user_menu:
         file.close()
         self.bbq_ingredients = Label(frame, text = self.bbq_list[0]+'\n'+self.bbq_list[1],
                                      font = 'Times 12 bold', fg = 'gray', bg = '#f2aca5')
-        #self.bbq_ingredients.grid(row=7, column = 0, sticky = S, rowspan = 2)
         self.peppe_ingredients = Label(frame, text = self.peppe_list[0]+'\n'+
                                         self.peppe_list[1], font = 'Times 12 bold',
                                         fg = 'gray', bg = '#f2aca5')
-        #self.peppe_ingredients.grid(row=7, column = 2, sticky = S, rowspan = 2)
         self.space.grid(row = 9+self.row_count, column = 0, columnspan = 3)
         self.choice_button = Button(frame, text="Submit choice", bg='#f2aca5',
                                     font = self.font2, fg='black',
-                                    activebackground = '#f2aca5', command = self.choice)
-        #self.tab.grid(row = 9, column = 1)       
+                                    activebackground = '#f2aca5', command = self.choice)  
         self.choice_button.grid(row=9+self.row_count, column = 0, columnspan = 3)
     def choice(self):
-        #print(self.pizza_vars)
-        #print (self.bbq.get())
-        #print (self.peppe.get())
         self.pizza_list = []
         self.pizza_list.append(100)
         for i in range(1, self.row_count+1):
@@ -100,7 +78,6 @@ class user_menu:
         if(self.pizza_list.count(1) == 1):
             self.pizza_func(self.pizza_list.index(1))
         elif(self.pizza_list.count(1) > 1):
-            #print("BOTH")
             self.label2 = Label(self.frame1,
                                 text = "Choose only one type of Pizza!",
                                  bg='#f2aca5', font = self.font2, fg='black')
@@ -108,7 +85,6 @@ class user_menu:
             button1 = Button(self.frame1, text = 'Kill label', command = self.label2.destroy)
             button1.after(2000, button1.invoke)
         elif(self.pizza_list.count(1)==0):
-            #print("NONE")
             self.label2 = Label(self.frame1,
                                 text = "Choose something before clicking!",
                                  bg='#f2aca5', font = self.font2, fg='black')
@@ -117,15 +93,10 @@ class user_menu:
             button1.after(2000, button1.invoke)
 
     def orders(self, frame):
-        #self.frame1.geometry("427x636+70+42")
-        #Label(frame, text = '\n', bg = '#f2aca5', 
-        #    font = 'Times 3 bold').grid(row = 11+self.row_count, column = 0, columnspan = 3)
         self.size = "427x"
         self.height = 636+(self.row_count-3)*10
         self.size+=str(self.height)
         self.size+= "+70+42"
-        #print(self.size)
-        #frame.geometry("427x716+70+42")
         self.print_orders = Text(frame, font = 'Times 16 bold',
                                 bg = "#f2aca5",
                                 height = 8, width = 38)

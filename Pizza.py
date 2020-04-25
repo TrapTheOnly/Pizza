@@ -177,18 +177,9 @@ class PizzaBuilder:
         self.pizza = PizzaBuilder(self.pizza_type)
         for ex in self.extentions_list :
             self.pizza.add_extention(ex)
-        #print(pizza.get_status())
 
     def get_price(self):
         return self.pizza.get_price()
     
     def get_status(self):
         return self.pizza.get_status()
-
-#pizza = PizzaBuilder('Barbeque')
-#pizza.extentions_list.insert(0, '      Additions: ')
-#print(pizza.get_status())
-#pizza.add_extention('Beef')
-#pizza.add_extention('ExtraCheese')
-#pizza.remove_extention('Beef')
-#print(pizza.get_status())
