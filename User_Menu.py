@@ -98,7 +98,7 @@ class user_menu:
             self.data += '\n'
         self.print_orders.insert(INSERT, self.data)
         self.button3 = Button(frame, command = lambda: self.print_orders.destroy())
-        self.button3.after(5000, self.button3.invoke)
+        #self.button3.after(5000, self.button3.invoke)
 
     def pizza_func(self, id):
         #print("BBQ")
