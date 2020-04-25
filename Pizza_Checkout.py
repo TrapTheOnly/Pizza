@@ -200,6 +200,8 @@ class Checkout:
         button5.after(100, button5.invoke)
         self.label_price.place(x = 120, y = 300)
         self.add_order(str(self.pizza_type), str(self.login), str(self.price))
+        button6 = Button(self.frame, command = self.frame.destroy)
+        button6.after(4000, button6.invoke)
 
     def listToString(self, s):
         str1 = ""  

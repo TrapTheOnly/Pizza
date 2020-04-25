@@ -28,16 +28,10 @@ class user_menu:
                                 font = self.font2, fg='black',
                                 activebackground = '#f2aca5', command = lambda:  self.orders(frame))
         self.get_orders.grid(row = 0, column = 2) 
-        self.bbq_list = ['Chicken, Mozarella Cheese,', 'Mushrooms, BBQ Sauce']
-        self.peppe_list = ['Pepperoni', 'Mozarella Cheese']
         self.label1 = Label(frame, text = 'Pizza Constructor\n', bg='#f2aca5',
                              fg='#10c200', font=self.font1)
         self.label1.grid(row=1, column=0, columnspan=3, sticky=N)
         Label(frame, text="\n\n\n\n\n\n")
-        self.bbq_photo = PhotoImage(file="Photos/bbq_edited_gif.gif")
-        self.peppe_photo = PhotoImage(file="Photos/pepperoni_edited_gif.gif")
-        self.print_bbq = Label(frame, image=self.bbq_photo,
-                                bg='#f2aca5', height=220, width = 320)
         self.pizza_vars = {}
         self.row = 6
         self.pizza_checks = {}
@@ -60,11 +54,6 @@ class user_menu:
         Label(frame, text = line, font = 'Times 18 italic', bg = '#f2aca5', 
                 fg = 'gray').grid(row = 8+self.row_count, column = 0, columnspan = 3)
         file.close()
-        self.bbq_ingredients = Label(frame, text = self.bbq_list[0]+'\n'+self.bbq_list[1],
-                                     font = 'Times 12 bold', fg = 'gray', bg = '#f2aca5')
-        self.peppe_ingredients = Label(frame, text = self.peppe_list[0]+'\n'+
-                                        self.peppe_list[1], font = 'Times 12 bold',
-                                        fg = 'gray', bg = '#f2aca5')
         self.space.grid(row = 9+self.row_count, column = 0, columnspan = 3)
         self.choice_button = Button(frame, text="Submit choice", bg='#f2aca5',
                                     font = self.font2, fg='black',
@@ -94,13 +83,13 @@ class user_menu:
 
     def orders(self, frame):
         self.size = "427x"
-        self.height = 636+(self.row_count-3)*10
+        self.height = 506+(self.row_count-3)*20
         self.size+=str(self.height)
         self.size+= "+70+42"
         self.print_orders = Text(frame, font = 'Times 16 bold',
                                 bg = "#f2aca5",
-                                height = 8, width = 38)
-        self.print_orders.grid(row = 10+self.row_count, column = 0, columnspan = 3, sticky = S)
+                                height = 5, width = 38)
+        self.print_orders.place(x = 2, y = self.height)
         self.c.execute("SELECT * FROM users WHERE login = ?", (str(self.username),))
         self.list = list(self.c.fetchone())
         self.data = ""
@@ -125,13 +114,14 @@ def game(login):
     c.execute("select count(*) from pizzas")
     row_count = c.fetchone()
     size = "427x"
-    height = 636+(row_count[0]-3)*10
+    height = 636+(row_count[0]-3)*20
     size+=str(height)
     size+= "+70+42"
     root = Tk()
-    root.geometry(size)
+    print(size)
+    root.geometry(str(size))
     root.title("Pizza constructor app")
-    root.resizable(0,0)
+    #root.resizable(0,0)
     root.configure(background="#f2aca5")
     menu=user_menu(root, login, row_count[0])
     root.mainloop()
