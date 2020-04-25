@@ -131,7 +131,6 @@ def main():
             )""")
     except:
         pass
-    #c1.execute("DELETE FROM pizzas WHERE id = 5")
     conn1.commit()
     c1.execute("SELECT rowid FROM pizzas WHERE pizza_type = 'BlankPizza'")
     if len(c1.fetchall())==0:
