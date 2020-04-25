@@ -186,7 +186,7 @@ class Checkout:
 
     def get_price(self):
         self.price = self.pizza.get_price()
-        self.label_price = Label(self.frame, text = 'Price: '+ str(self.price), bg = '#f2aca5',
+        self.label_price = Label(self.frame, text = 'Price: '+ str(self.price)+'$', bg = '#f2aca5',
                                 fg = 'black', font = 'Times 32 bold')
         button1 = Button(self.frame, command = self.bbq_button.destroy)
         button2 = Button(self.frame, command = self.ketchup_button.destroy)
