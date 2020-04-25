@@ -94,7 +94,7 @@ class admin_menu:
                         (str(self.entry_name.get()), int(self.entry_price.get()), 
                         str(self.entry_ings.get(1.0, END)), int(row_count[0]+1)))
             conn1.commit()
-            file = open("notifications.txt", 'w')
+            file = open("Pizzas/notifications.txt", 'w')
             file.write("New pizza added - {}!".format(str(self.entry_name.get())))
             file.close()
             Label(self.frame1, text = 'Added!', font = 'Times 22 bold',

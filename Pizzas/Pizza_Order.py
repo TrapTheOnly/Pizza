@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter.font import *
-from Pizza import *
-import User_Menu
-import Pizza_Checkout
+from Pizzas.Pizza import *
+from Pizzas import User_Menu
+from Pizzas import Pizza_Checkout
 
 
 class Pizza:

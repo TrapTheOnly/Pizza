@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter.font import Font
 import time
-import User_Menu
-import Admin_Menu
+from Pizzas import User_Menu
+from Pizzas import Admin_Menu
 import sqlite3
 
 class main_menu:

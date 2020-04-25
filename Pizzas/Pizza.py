@@ -11,7 +11,6 @@ class Pizza(metaclass=abc.ABCMeta):
     def get_status(self):
         pass
 
-
 class Pizza_None(Pizza):
     pizza_price=0
     def __init__(self, ingredients, price):

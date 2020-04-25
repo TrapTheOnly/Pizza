@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter.font import Font
-import Pizza
-import Pizza_Order
+from Pizzas import Pizza
+from Pizzas import Pizza_Order
 import time
 import sqlite3
 
@@ -49,7 +49,7 @@ class user_menu:
                         onvalue = 1, offvalue = 0)
             self.pizza_checks[i].grid(row = self.row, column = 0, columnspan = 3)
             self.row+=1
-        file = open("notifications.txt")
+        file = open("Pizzas/notifications.txt")
         line = file.readline()
         Label(frame, text = line, font = 'Times 18 italic', bg = '#f2aca5', 
                 fg = 'gray').grid(row = 8+self.row_count, column = 0, columnspan = 3)
@@ -83,7 +83,7 @@ class user_menu:
 
     def orders(self, frame):
         self.size = "427x"
-        self.height = 506+(self.row_count-3)*20
+        self.height = 506+(self.row_count-3)*25
         self.size+=str(self.height)
         self.size+= "+70+42"
         self.print_orders = Text(frame, font = 'Times 16 bold',
@@ -98,6 +98,7 @@ class user_menu:
             self.data += '\n'
         self.print_orders.insert(INSERT, self.data)
         self.button3 = Button(frame, command = lambda: self.print_orders.destroy())
+        self.button3.after(5000, self.button3.invoke)
 
     def pizza_func(self, id):
         self.c1.execute("SELECT pizza_type FROM pizzas WHERE id = ?", (int(id),))
@@ -112,11 +113,10 @@ def game(login):
     c.execute("select count(*) from pizzas")
     row_count = c.fetchone()
     size = "427x"
-    height = 636+(row_count[0]-3)*20
+    height = 636+(row_count[0]-3)*25
     size+=str(height)
     size+= "+70+42"
     root = Tk()
-    print(size)
     root.geometry(str(size))
     root.title("Pizza constructor app")
     #root.resizable(0,0)

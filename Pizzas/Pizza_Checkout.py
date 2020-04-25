@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter.font import *
-import User_Menu
-import Pizza
+from Pizzas import User_Menu
+from Pizzas import Pizza
 import sqlite3
 from datetime import datetime
 
