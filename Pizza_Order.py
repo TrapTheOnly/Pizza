@@ -19,7 +19,7 @@ class Pizza:
     
     def options(self):
         self.frame = Tk()
-        self.frame.geometry("420x793+70+0")
+        self.frame.geometry("420x760+70+0")
         self.frame.title("Pizza")
         self.frame.resizable(0,0)
         self.frame.configure(background="#f2aca5")

@@ -127,7 +127,8 @@ class user_menu:
         #print(self.size)
         #frame.geometry("427x716+70+42")
         self.print_orders = Text(frame, font = 'Times 16 bold',
-                                height = 5, width = 38)
+                                bg = "#f2aca5",
+                                height = 8, width = 38)
         self.print_orders.grid(row = 10+self.row_count, column = 0, columnspan = 3, sticky = S)
         self.c.execute("SELECT * FROM users WHERE login = ?", (str(self.username),))
         self.list = list(self.c.fetchone())
@@ -137,7 +138,7 @@ class user_menu:
             self.data += '\n'
         self.print_orders.insert(INSERT, self.data)
         self.button3 = Button(frame, command = lambda: self.print_orders.destroy())
-        self.button3.after(2000, self.button3.invoke)
+        self.button3.after(5000, self.button3.invoke)
 
     def pizza_func(self, id):
         #print("BBQ")

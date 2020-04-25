@@ -38,7 +38,7 @@ class Checkout:
                                     fg = '#10c200', font = 'Times 32 bold')
         self.rows_count=1
         if(len(self.status)==0):
-            self.print_ingredients = Text(self.frame, width = 27, height =4,
+            self.print_ingredients = Text(self.frame, width = 29, height =4,
                                     bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
             self.print_ingredients.insert(1.0, 'Additions: You added nothing!')
             self.label_checkout = Label(self.frame, text = ' Checkout', bg = '#f2aca5',
@@ -105,9 +105,9 @@ class Checkout:
             self.print_ingredients = Text(self.frame,
                                     bg = '#f2aca5', fg = 'black', 
                                     font = 'Times 20 bold',
-                                    width = 27, height = 4)
+                                    width = 29, height = 4)
             self.print_ingredients.insert(1.0, self.listToString(self.print_status))
-        self.print_ingredients.place(x = 20, y = 100)
+        self.print_ingredients.place(x = 7, y = 100)
         #print(self.pizza.extentions_list)
 
         #---------------Remove extention------------------
