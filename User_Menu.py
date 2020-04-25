@@ -98,10 +98,8 @@ class user_menu:
             self.data += '\n'
         self.print_orders.insert(INSERT, self.data)
         self.button3 = Button(frame, command = lambda: self.print_orders.destroy())
-        #self.button3.after(5000, self.button3.invoke)
 
     def pizza_func(self, id):
-        #print("BBQ")
         self.c1.execute("SELECT pizza_type FROM pizzas WHERE id = ?", (int(id),))
         self.pizza_type = str(list(self.c1.fetchone())[0])
         self.frame1.destroy()
