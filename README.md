@@ -4,6 +4,7 @@
 * [General info](#general-info)
 * [Project details](#project-details)
 * [Installation](#installation)
+* [FAQ](#faq)
 
 ## General info
 This is a Pizza app, which has main functions, such as:
