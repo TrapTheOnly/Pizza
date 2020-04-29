@@ -36,23 +36,24 @@ class admin_menu:
         self.data_get.pack()
 
     def check(self):
+        self.data_get.delete(1.0, END)
         self.c.execute("SELECT rowid FROM users WHERE login = ?", (str(self.username.get()),))
-        if(len(self.c.fetchall())==1):
+        if len(self.c.fetchall())==0:
             self.error_message.pack()
-        elif len(self.c.fetchall()) == 0:
+        else:
+            print('here')
             self.c.execute("SELECT * FROM users WHERE login = ?", (str(self.username.get()),))
             self.list = list(self.c.fetchone())
             self.data = ""
-            for i in range(1):
-                self.data += "Login: "
-                self.data += str(self.list[0])
-                self.data += '\n'
-                self.data += "Password: "
-                self.data += str(self.list[1])
-                self.data += '\n'
-                self.data += "Orders: \n"
-                self.data += str(self.list[2])
-                self.data += '\n'
+            self.data += "Login: "
+            self.data += str(self.list[0])
+            self.data += '\n'
+            self.data += "Password: "
+            self.data += str(self.list[1])
+            self.data += '\n'
+            self.data += "Orders: \n"
+            self.data += str(self.list[2])
+            self.data += '\n'
             self.data_get.insert(INSERT, self.data)
     
     def create_new_pizza(self):
