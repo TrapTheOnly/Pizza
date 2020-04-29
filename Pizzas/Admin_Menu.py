@@ -23,7 +23,7 @@ class admin_menu:
                     fg = 'black', font = self.font2)
         
         self.username = Entry(self.root, width = 20, exportselection = 0,
-                            font = self.font2)
+                            bg = '#dcaca5', font = self.font2)
         self.username.pack()
         Label(self.root, text = '', bg = '#f2aca5').pack()
         self.button = Button(self.root, text = 'Search', bg = '#f2aca5',
@@ -32,13 +32,11 @@ class admin_menu:
         self.button.pack()
         Label(self.root, text = '', bg = '#f2aca5').pack()
         self.data_get = Text(self.root, width = 29, height = 8,
-                            font = 'Times 18 bold')
+                            bg = '#dcaca5', font = 'Times 18 bold')
         self.data_get.pack()
 
     def check(self):
-        print(str(self.username.get()))
         self.c.execute("SELECT rowid FROM users WHERE login = ?", (str(self.username.get()),))
-        print(len(self.c.fetchall()))
         if(len(self.c.fetchall())==1):
             self.error_message.pack()
         elif len(self.c.fetchall()) == 0:
@@ -65,17 +63,18 @@ class admin_menu:
         self.frame1.resizable(0,0)
         Label(self.frame1, text = "Pizza Name:", bg = '#f2aca5',
             font = 'Times 32 bold').pack()
-        self.entry_name = Entry(self.frame1, font = 'Times 22 bold')
+        self.entry_name = Entry(self.frame1, font = 'Times 22 bold', bg = '#dcaca5')
         self.entry_name.pack()
         Label(self.frame1, text = '\n', font = 'Times 12 bold', bg = '#f2aca5').pack()
         Label(self.frame1, text = "Pizza Price:", bg = '#f2aca5',
             font = 'Times 32 bold').pack()
-        self.entry_price = Entry(self.frame1, font = 'Times 22 bold')
+        self.entry_price = Entry(self.frame1, font = 'Times 22 bold', bg = '#dcaca5')
         self.entry_price.pack()
         Label(self.frame1, text = '\n', font = 'Times 12 bold', bg = '#f2aca5').pack()
         Label(self.frame1, text = "Pizza Ingredients:", bg = '#f2aca5',
             font = 'Times 32 bold').pack()
-        self.entry_ings = Text(self.frame1, font = 'Times 22 bold', height = 5, width = 20)
+        self.entry_ings = Text(self.frame1, font = 'Times 22 bold', 
+                                height = 5, width = 20, bg = '#dcaca5')
         self.entry_ings.pack()
         Label(self.frame1, text = '\n', font = 'Times 12 bold', bg = '#f2aca5').pack()
         Button(self.frame1, text = 'Submit', bg = '#f2aca5', 
