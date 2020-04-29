@@ -27,6 +27,7 @@ This is a Pizza app, which has main functions, such as:
 ```
 pip install tk
 git clone https://github.com/TrapTheOnly/Pizza.git
+python3 main.py
 ```
 
 ## FAQ
