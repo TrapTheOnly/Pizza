@@ -87,7 +87,7 @@ class user_menu:
         self.size+=str(self.height)
         self.size+= "+70+42"
         self.print_orders = Text(frame, font = 'Times 16 bold',
-                                bg = "#f2aca5",
+                                bg = '#dcaca5',
                                 height = 5, width = 38)
         self.print_orders.place(x = 2, y = self.height)
         self.c.execute("SELECT * FROM users WHERE login = ?", (str(self.username),))

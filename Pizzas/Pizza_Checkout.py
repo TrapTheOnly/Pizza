@@ -35,12 +35,12 @@ class Checkout:
         del self.print_status[:]
         self.status = self.pizza.extentions_list
         self.check=False
-        self.label_checkout = Label(self.frame, text = 'Checkout', bg = '#f2aca5',
+        self.label_checkout = Label(self.frame, text = ' Checkout', bg = '#f2aca5',
                                     fg = '#10c200', font = 'Times 32 bold')
         self.rows_count=1
         if(len(self.status)==0):
             self.print_ingredients = Text(self.frame, width = 29, height =4,
-                                    bg = '#f2aca5', fg = 'black', font = 'Times 20 bold')
+                                    bg = '#dcaca5', fg = 'black', font = 'Times 20 bold')
             self.print_ingredients.insert(1.0, 'Additions: You added nothing!')
             self.label_checkout = Label(self.frame, text = ' Checkout', bg = '#f2aca5',
                                     fg = '#10c200', font = 'Times 32 bold')
@@ -72,7 +72,7 @@ class Checkout:
         self.space.grid(row = 2, column = 0, columnspan = 3)
         if(len(self.status)>0):
             self.print_ingredients = Text(self.frame,
-                                    bg = '#f2aca5', fg = 'black', 
+                                    bg = '#dcaca5', fg = 'black', 
                                     font = 'Times 20 bold',
                                     width = 29, height = 4)
             self.print_ingredients.insert(1.0, self.listToString(self.print_status))

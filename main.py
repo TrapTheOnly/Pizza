@@ -21,10 +21,10 @@ class main_menu:
         Label(self.root, text = "Username:", 
             bg = "#f2aca5", fg = 'Black', font = self.font2).pack()
         self.login_username = Entry(self.root, width = 20, exportselection = 0,
-                            font = self.font2)
+                            font = self.font2, bg = '#dcaca5')
         self.login_username.pack()
         self.login_password = Entry(self.root, width = 20, exportselection = 0, 
-                            font = self.font2, show = '*')
+                            font = self.font2, show = '*', bg = '#dcaca5')
         Label(self.root, text = "Password:", 
             bg = "#f2aca5", fg = 'Black', font = self.font2).pack()
         self.login_password.pack()
@@ -41,10 +41,14 @@ class main_menu:
             self.c.execute("SELECT rowid FROM users WHERE login = ?", (str(self.login_username.get()),))
             user =  User(self.login_username.get(), self.login_password.get(), self.db)
             if len(self.c.fetchall()) == 0:
-                self.label1 = Label(self.root, text = 'No such user. Registered new!\nYou can now log in!', 
+                self.label1 = Label(self.root, text = 'No such user. Register new!', 
                         bg = '#f2aca5', fg = 'black', 
                         font = 'Times 14 bold')
+                self.button1 = Button(self.root, command = self.register_user)
                 self.label1.pack()
+                button3 = Button(self.root, command = self.label1.destroy)
+                self.button1.after(1200, self.button1.invoke)
+                button3.after(2000, button3.invoke)
                 self.login_password.delete(0, len(self.login_password.get()))
                 self.login_username.delete(0, len(self.login_username.get()))
                 def run_new_screen(self):
@@ -75,29 +79,52 @@ class main_menu:
                 button1 = Button(self.root, command = self.label2.destroy)
                 button1.after(2000, button1.invoke)
 
+    def register_user(self):
+        self.new_user = Tk()
+        self.new_user.geometry("400x300+480+42")
+        self.new_user.title("Pizza App Register")
+        self.new_user.resizable(0,0)
+        self.new_user.configure(background="#f2aca5")
+        Label(self.new_user, text = "Enter user's login: ", font = self.font2, 
+            bg = '#f2aca5').pack()
+        self.entry1 = Entry(self.new_user, bg = '#dcaca5', fg = 'black', font = 'Times 22 bold')
+        self.entry1.pack()
+        Label(self.new_user, text = "Enter user's password: ", font = self.font2, 
+            bg = '#f2aca5').pack()
+        self.entry2 = Entry(self.new_user, bg = '#dcaca5', fg = 'black', font = 'Times 22 bold', show = '*')
+        self.entry2.pack()
+        Label(self.new_user, text = "\n", 
+            bg = "#f2aca5", fg = 'Black', font = self.font2).pack()
+        button1 = Button(self.new_user, text = 'Sign Up', font = self.font2, 
+                bg = '#f2aca5', command = self.make_register_true)
+        button1.pack()
+        self.new_user.mainloop()
+        
+    def make_register_true(self):
+        user1 =  User(self.entry1.get(), self.entry2.get(), self.db)
+        user1.create_new()
+        Label(self.new_user, text = "Registered!", font = 'Times 18 italic', 
+            bg = '#f2aca5').pack()
+        button2 = Button(self.new_user, command = self.new_user.destroy)
+        button2.after(2000, button2.invoke)
+
+
 class User:
     def __init__(self, login, password, db):
         self.login = login
         self.db = db
         self.password = password
         self.c = self.db.cursor()
-        self.c.execute("SELECT rowid FROM users WHERE login = ?", (str(self.login),))
-        if len(self.c.fetchall())==0:
-            self.c.execute("INSERT INTO users VALUES (?, ?, ?)", (str(self.login), str(self.password), 'None',))
-        self.db.commit()
+        self.true = False
+        
+        
 
-    def add_order(self, pizza_type, login, price):
-        self.c.execute("SELECT orders FROM users WHERE login = ?", (str(login), ))
-        self.orders_list = str(list(self.c.fetchone())[0])
-        if self.orders_list == 'None':
-            self.orders_list = ""
-        self.orders_list += str(pizza_type)
-        self.orders_list += ' - '
-        self.orders_list += str(price)
-        self.orders_list += ', '
-        self.c.execute("UPDATE users SET orders = ? WHERE login = ?", (self.orders_list, str(login),))
+    def create_new(self):
+        self.c.execute("INSERT INTO users VALUES (?, ?, ?)", (str(self.login), str(self.password), 'None',))
         self.db.commit()
-    
+        self.true = True
+
+
     @property
     def name(self):
         return str(self.login)
