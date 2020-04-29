@@ -1,11 +1,11 @@
 # Pizza
 
-##Table of contents
+## Table of contents
 *[General info](#general-info)
 *[Project details](#project-details)
 #[Installation](#installation)
 
-##General info
+## General info
 This is a Pizza app, which has main functions, such as:
 * Creating a new user 
 * Logging in 
@@ -17,12 +17,12 @@ This is a Pizza app, which has main functions, such as:
 * As admin searching data about all users
 * Notifying all users about new pizzas
 
-##Project details
+## Project details
 * Current version - 2.1
 * Created using Tkinter on Python
 * Uses SQLite databases to store information
 
-##Installation
+## Installation
 '''
 pip install tk
 git clone https://github.com/TrapTheOnly/Pizza.git
