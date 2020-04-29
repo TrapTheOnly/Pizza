@@ -136,6 +136,9 @@ class User:
         return str(self.orders_list)
 
 def main():
+    file = open("Pizzas/pizza_ings.txt", "w")
+    file.write('0')
+    file.close()
     conn = sqlite3.connect('users.db')
     c = conn.cursor()
     try:

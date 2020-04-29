@@ -67,8 +67,8 @@ class Checkout:
                                     fg = '#10c200', font = 'Times 32 bold')
         self.rows_count=1
         if(len(self.status)==0):
-            self.print_ingredients = Text(self.frame, width = 29, height =4,
-                                    bg = '#dcaca5', fg = 'black', font = 'Times 20 bold')
+            self.print_ingredients = Text(self.frame, width = 45, height = 8,
+                                    bg = '#dcaca5', fg = 'black', font = 'Times 13 bold')
             self.print_ingredients.insert(1.0, self.newListToString(self.new_list_ings))
             self.print_ingredients.insert(END, 'Additions: You added nothing!')
             self.label_checkout = Label(self.frame, text = ' Checkout', bg = '#f2aca5',
@@ -102,10 +102,10 @@ class Checkout:
         if(len(self.status)>0):
             self.print_ingredients = Text(self.frame,
                                     bg = '#dcaca5', fg = 'black', 
-                                    font = 'Times 20 bold',
-                                    width = 29, height = 4)
+                                    font = 'Times 13 bold',
+                                    width = 45, height = 8)
             self.print_ingredients.insert(1.0, self.newListToString(self.new_list_ings)+self.listToString(self.print_status))
-        self.print_ingredients.place(x = 7, y = 100)
+        self.print_ingredients.place(x = 6, y = 80)
 
         #---------------Remove extention------------------
         self.label_error = Label(self.frame, text = 'No such addition for your Pizza',
@@ -288,8 +288,11 @@ class Checkout:
     def cancel(self):
         self.file.write("0")
         self.file.close()
+        button8 = Button(self.frame, command = lambda: User_Menu.game(self.login))
+        button8.after(500, button8.invoke)
         button7 = Button(self.frame, command = self.frame.destroy)
         button7.after(500, button7.invoke)
+        
 
     def listToString(self, s):
         str1 = ""  

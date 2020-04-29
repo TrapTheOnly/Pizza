@@ -32,7 +32,4 @@ python3 main.py
 
 ## FAQ
 ### Currently confirmed issues
-* If somewhy you terminated the program without proper exit, check if your ..\Pizzas\pizza_ings.txt file consists only of only one '0' or not. If not, then delete everything written in it and write '0' The file's inside should look like:
-```
-0
-```
+* The app is too cool - No fixes :(
