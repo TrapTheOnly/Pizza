@@ -23,7 +23,7 @@ This is a Pizza app, which has main functions, such as:
 * Uses SQLite databases to store information
 
 ## Installation
-'''
+```
 pip install tk
 git clone https://github.com/TrapTheOnly/Pizza.git
-'''
+```
