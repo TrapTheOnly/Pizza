@@ -1,9 +1,9 @@
 # Pizza
 
 ## Table of contents
-*[General info](#general-info)
-*[Project details](#project-details)
-#[Installation](#installation)
+* [General info](#general-info)
+* [Project details](#project-details)
+* [Installation](#installation)
 
 ## General info
 This is a Pizza app, which has main functions, such as:
